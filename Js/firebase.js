@@ -39,3 +39,6 @@
       console.error('Error al agregar cliente', error)
     }
   }
+
+  export const obtenerClientes = (callback) => onSnapshot(collection(db,'clientes'),callback)
+  export const borrarCliente = (id) => deleteDoc(doc(db,'clientes',id));

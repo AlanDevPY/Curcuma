@@ -50,7 +50,6 @@ window.addEventListener("DOMContentLoaded", async () => {
         querySnapshot.forEach((doc) => {
             const cliente = doc.data(); // Obtener los datos de la tarea
             clientes.push({ ...cliente, id: doc.id }); // Agregar cada tarea al arreglo 'tasks' con su ID
-            // console.log(cliente.telefono);
         });
 
 

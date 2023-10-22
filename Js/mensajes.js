@@ -6,6 +6,7 @@ import {
 let btnEnvio = document.getElementById("btnEnvio")
 let areaMensje = document.getElementById("areaMensaje")
 let operadora = 595
+let inputFile = document.getElementById("inputFile")
 
 let mensaje = `
 Hola 
@@ -33,7 +34,7 @@ Hola
                     account: "1697991046e4da3b7fbbce2345d7772b0674a318d565354986185a6",
                     recipient: operadora+numero,
                     type: "text",
-                    message: mensaje, // Aquí debes proporcionar el mensaje que deseas enviar
+                    message: areaMensje.value + inputFile.value, // Aquí debes proporcionar el mensaje que deseas enviar
                   }; 
           
                   $.ajax({

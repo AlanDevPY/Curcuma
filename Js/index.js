@@ -16,27 +16,40 @@ let inputReferencia = document.getElementById('inputReferencia')
 
 // FUNCIONES
 
-btnRegistrar.addEventListener('click', (e) => {
+btnRegistrar.addEventListener('click', async (e) => {
     e.preventDefault();
 
-    if (!(inputNombre.value === '' || inputApellido.value === '' || inputTelefono.value === '' || inputDireccion.value === '' || inputReferencia.value === '')) {
-        let nombre = inputNombre.value;
-        let apellido = inputApellido.value;
-        let telefono = inputTelefono.value;
-        let direccion = inputDireccion.value;
-        let referencia = inputReferencia.value;
-        registrarClientes(nombre, apellido, telefono, direccion, referencia)
+    let numeroBuscado = inputTelefono.value;
 
-        inputNombre.value = ""
-        inputApellido.value = ""
-        inputTelefono.value = ""
-        inputDireccion.value = ""
-        inputReferencia.value = ""
-    } else {
-        console.log('No se puede registrar');
-        alert('Favor completa todo los campos')
-    }
-})
+
+    obtenerClientes((querySnapshot) => {
+        const telefono = []; // Arreglo para almacenar números de teléfono
+        querySnapshot.forEach((doc) => {
+            const cliente = doc.data();
+            telefono.push(cliente.telefono);
+        });
+
+
+        if (!(telefono.includes(numeroBuscado) == true ||   inputNombre.value === '' || inputApellido.value === '' || inputTelefono.value === '' || inputDireccion.value === '' || inputReferencia.value === '')) {
+            let nombre = inputNombre.value;
+            let apellido = inputApellido.value;
+            let telefono = inputTelefono.value;
+            let direccion = inputDireccion.value;
+            let referencia = inputReferencia.value;
+            registrarClientes(nombre, apellido, telefono, direccion, referencia);
+            alert("Cliente Registrado");
+            
+            inputNombre.value = "";
+            inputApellido.value = "";
+            inputTelefono.value = "";
+            inputDireccion.value = "";
+            inputReferencia.value = "";
+        } else {
+            // alert("Cliente no registrado")
+        }
+    });
+});
+
 
 window.addEventListener("DOMContentLoaded", async () => {
     let tBody = document.querySelector(".tBody");

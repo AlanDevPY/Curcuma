@@ -32,8 +32,6 @@
         direccion,
         referencia
       });
-
-      console.log('Cliente registrado');
     }
     catch {
       console.error('Error al agregar cliente', error)

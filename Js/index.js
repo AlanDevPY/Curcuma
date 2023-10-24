@@ -19,10 +19,10 @@ let clientesRegistrados = []
 
 // FUNCIONES
 window.addEventListener("DOMContentLoaded", async () => {
-    let querySnapshot = await obtenerDatos()
-    querySnapshot.forEach(doc => {
-        clientesRegistrados.unshift(doc.data())
-    });
+    // let querySnapshot = await obtenerDatos()
+    // querySnapshot.forEach(doc => {
+    //     clientesRegistrados.unshift(doc.data())
+    // });
 
 
     let tBody = document.querySelector(".tBody");
@@ -35,7 +35,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         // Iterar a través de cada documento en la consulta de tareas
         querySnapshot.forEach((doc) => {
             const cliente = doc.data(); // Obtener los datos de la tarea
-            clientes.push({ ...cliente, id: doc.id }); // Agregar cada tarea al arreglo 'tasks' con su ID
+            clientes.push({ ...cliente, id: doc.id });
+            clientesRegistrados.push(doc.data()) // Agregar cada tarea al arreglo 'tasks' con su ID
         });
 
 

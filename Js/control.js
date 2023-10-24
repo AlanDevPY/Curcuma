@@ -9,16 +9,21 @@ let clientes = []
 window.addEventListener('DOMContentLoaded', async () => {
     let querySnapshot = await obtenerDatos()
     querySnapshot.forEach(doc => {
-        clientes.push(doc.data())
+        clientes.unshift(doc.data())
+
     });
 })
 
 console.log(clientes);
 
 btnDatos.addEventListener('click', () => {
-    clientes.forEach( cliente => {
-        console.log(`Su nombre es ${cliente.nombre} ${cliente.apellido}`);
-    })
+    let clienteEncontrado = clientes.some(cliente => cliente.nombre === "Alan");
+
+    if(clienteEncontrado){
+        console.log("Cliente encontrado")
+    }else{
+        console.log("Cliente no encontrado")
+    }
 })
 
 

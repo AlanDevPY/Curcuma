@@ -10,7 +10,6 @@ window.addEventListener('DOMContentLoaded', async () => {
     let querySnapshot = await obtenerDatos()
     querySnapshot.forEach(doc => {
         clientes.unshift(doc.data())
-
     });
 })
 

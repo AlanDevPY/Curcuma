@@ -1,10 +1,12 @@
 import {
     registrarClientes,
     obtenerClientes,
-    borrarCliente
+    borrarCliente,
+    obtenerDatos
 } from "./firebase.js";
 
 
+// Variables
 
 const btnRegistrar = document.getElementById('btnRegistrar')
 let inputNombre = document.getElementById('inputNombre')
@@ -12,46 +14,17 @@ let inputApellido = document.getElementById('inputApellido')
 let inputTelefono = document.getElementById('inputTelefono')
 let inputDireccion = document.getElementById('inputDireccion')
 let inputReferencia = document.getElementById('inputReferencia')
+let clientesRegistrados = []
 
 
 // FUNCIONES
-
-btnRegistrar.addEventListener('click', async (e) => {
-    e.preventDefault();
-
-    let numeroBuscado = inputTelefono.value;
-
-
-    obtenerClientes((querySnapshot) => {
-        const telefono = []; // Arreglo para almacenar números de teléfono
-        querySnapshot.forEach((doc) => {
-            const cliente = doc.data();
-            telefono.push(cliente.telefono);
-        });
-
-
-        if (!(telefono.includes(numeroBuscado) == true ||   inputNombre.value === '' || inputApellido.value === '' || inputTelefono.value === '' || inputDireccion.value === '' || inputReferencia.value === '')) {
-            let nombre = inputNombre.value;
-            let apellido = inputApellido.value;
-            let telefono = inputTelefono.value;
-            let direccion = inputDireccion.value;
-            let referencia = inputReferencia.value;
-            registrarClientes(nombre, apellido, telefono, direccion, referencia);
-            alert("Cliente Registrado");
-            
-            inputNombre.value = "";
-            inputApellido.value = "";
-            inputTelefono.value = "";
-            inputDireccion.value = "";
-            inputReferencia.value = "";
-        } else {
-            // alert("Cliente no registrado")
-        }
-    });
-});
-
-
 window.addEventListener("DOMContentLoaded", async () => {
+    let querySnapshot = await obtenerDatos()
+    querySnapshot.forEach(doc => {
+        clientesRegistrados.unshift(doc.data())
+    });
+
+
     let tBody = document.querySelector(".tBody");
     // Llamar a la función onGetTask cuando se obtienen las tareas de la base de datos
     obtenerClientes((querySnapshot) => {
@@ -93,3 +66,25 @@ window.addEventListener("DOMContentLoaded", async () => {
         });
     });
 });
+
+// Funcion de agregar cliente
+btnRegistrar.addEventListener('click', (e) =>{
+    e.preventDefault()
+    let clienteEncontrado = clientesRegistrados.some(cliente => cliente.telefono === inputTelefono.value);
+
+    if(!(inputNombre.value === "" || inputApellido.value === "" || inputDireccion.value ==="" || inputReferencia.value === "" || inputTelefono.value === "")){
+        if(clienteEncontrado){
+            alert("Numero de telefono ya registrado")
+        }else{
+            registrarClientes(inputNombre.value, inputApellido.value, inputTelefono.value, inputDireccion.value, inputReferencia.value)
+            alert("Cliente Registrado");
+            inputNombre.value =""
+            inputApellido.value =""
+            inputTelefono.value =""
+            inputDireccion.value =""
+            inputReferencia.value =""
+        }
+    }else{
+        alert("Favor completar todo los campos")
+    }
+})

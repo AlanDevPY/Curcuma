@@ -2,7 +2,6 @@ import {
     registrarClientes,
     obtenerClientes,
     borrarCliente,
-    obtenerDatos
 } from "./firebase.js";
 
 
@@ -19,12 +18,6 @@ let clientesRegistrados = []
 
 // FUNCIONES
 window.addEventListener("DOMContentLoaded", async () => {
-    // let querySnapshot = await obtenerDatos()
-    // querySnapshot.forEach(doc => {
-    //     clientesRegistrados.unshift(doc.data())
-    // });
-
-
     let tBody = document.querySelector(".tBody");
     // Llamar a la función onGetTask cuando se obtienen las tareas de la base de datos
     obtenerClientes((querySnapshot) => {
@@ -38,7 +31,6 @@ window.addEventListener("DOMContentLoaded", async () => {
             clientes.push({ ...cliente, id: doc.id });
             clientesRegistrados.push(doc.data()) // Agregar cada tarea al arreglo 'tasks' con su ID
         });
-
 
         // Generar el HTML para cada tarea y agregarlo a la variable 'html'
         clientes.forEach((cliente) => {
@@ -78,7 +70,7 @@ btnRegistrar.addEventListener('click', (e) =>{
             alert("Numero de telefono ya registrado")
         }else{
             registrarClientes(inputNombre.value, inputApellido.value, inputTelefono.value, inputDireccion.value, inputReferencia.value)
-            alert("Cliente Registrado");
+            alert("Cliente registrado con exito");
             inputNombre.value =""
             inputApellido.value =""
             inputTelefono.value =""
@@ -88,4 +80,5 @@ btnRegistrar.addEventListener('click', (e) =>{
     }else{
         alert("Favor completar todo los campos")
     }
+
 })

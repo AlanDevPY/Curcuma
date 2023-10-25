@@ -40,9 +40,10 @@ window.addEventListener("DOMContentLoaded", async () => {
         <td>${cliente.nombre} ${cliente.apellido}</td>
         <td>${cliente.telefono}</td>
         <td>${cliente.direccion} | ${cliente.referencia}</td>
-        <td><button data-id="${cliente.id}" class="btn btn-warning" type="button">Eliminar</button></td>
-    </tr>
-             `;
+
+        </tr>
+        `;
+        // <td><button data-id="${cliente.id}" class="btn btn-warning" type="button">Eliminar</button></td>
         });
 
         // Insertar el HTML generado en el contenedor de tareas en el DOM

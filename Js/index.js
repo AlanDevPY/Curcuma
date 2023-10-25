@@ -65,7 +65,7 @@ btnRegistrar.addEventListener('click', (e) =>{
     e.preventDefault()
     let clienteEncontrado = clientesRegistrados.some(cliente => cliente.telefono === inputTelefono.value);
 
-    if(!(inputNombre.value === "" || inputApellido.value === "" || inputDireccion.value ==="" || inputReferencia.value === "" || inputTelefono.value === "")){
+    if(!(inputNombre.value === "" || inputApellido.value === "" || inputDireccion.value ===""  || inputTelefono.value === "")){
         if(clienteEncontrado){
             alert("Numero de telefono ya registrado")
         }else{

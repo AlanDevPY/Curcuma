@@ -43,6 +43,7 @@ ${areaMensaje.value}
             if (xhr.status === 200) {
                 var result = JSON.parse(xhr.responseText);
                 console.log("Mensaje enviado: " + JSON.stringify(result, null, 4));
+                alert("Enviando mensajes, puede cerrar esta ventana")
             } else {
                 console.log("Error al enviar el mensaje: " + xhr.statusText);
             }
@@ -54,6 +55,7 @@ ${areaMensaje.value}
 
         xhr.send(formData);
             })
-            
+            inputFile.value = ""
+            areaMensaje.value = ""
         })
     })

@@ -6,7 +6,7 @@ import {
 let btnEnvio = document.getElementById("btnEnvio")
 let areaMensaje = document.getElementById("areaMensaje")
 let operadora = 595
-// let inputFile = document.getElementById("inputFile")
+let inputFile = document.getElementById("inputFile").files[0];
 
 
 
@@ -24,32 +24,32 @@ let operadora = 595
 
             clientes.forEach((cliente) => {
 
-                var chat = {
-                    secret: "e513c41e6b43f77bc144d81ba7c39db3914a7c59",
-                    account: "1697991046e4da3b7fbbce2345d7772b0674a318d565354986185a6",
-                    recipient: operadora+cliente.telefono,
-                    type: "text",
-                    message: `Hola *${cliente.nombre} ${cliente.apellido}*
-${areaMensaje.value}
-                    `, // Aquí debes proporcionar el mensaje que deseas enviar
-                  }; 
-          
+            var formData = new FormData();
+        formData.append("secret", "e513c41e6b43f77bc144d81ba7c39db3914a7c59"); 
+        formData.append("account", "1698239289e4da3b7fbbce2345d7772b0674a318d56539133983e61");
+        formData.append("recipient", operadora+cliente.telefono);
+        formData.append("type", "media");
+        formData.append("message", areaMensaje);
+        formData.append("media_file", inputFile);
 
-                  $.ajax({
-                    type: "POST",
-                    url: "https://whats-flow.com/api/send/whatsapp",
-                    data: chat,
-                    success: function (response) {
-                      // Maneja la respuesta del servidor aquí (puede requerir validación)
-                      console.log(response);
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                      // Maneja los errores de manera adecuada, muestra mensajes al usuario si es necesario
-                      console.error("Error en la solicitud: " + textStatus, errorThrown);
-                    },
-                  });
+        var xhr = new XMLHttpRequest();
+        
+        xhr.open("POST", "https://whats-flow.com/api/send/whatsapp", true);
 
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var result = JSON.parse(xhr.responseText);
+                console.log("Mensaje enviado: " + JSON.stringify(result, null, 4));
+            } else {
+                console.log("Error al enviar el mensaje: " + xhr.statusText);
+            }
+        };
 
+        xhr.onerror = function() {
+            console.log("Error en la solicitud AJAX");
+        };
+
+        xhr.send(formData);
             })
             
             areaMensaje.value = ""

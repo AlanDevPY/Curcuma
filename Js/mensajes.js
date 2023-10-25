@@ -26,7 +26,7 @@ let inputFile = document.getElementById("inputFile");
 
             var formData = new FormData();
         formData.append("secret", "e513c41e6b43f77bc144d81ba7c39db3914a7c59"); 
-        formData.append("account", "1698239289e4da3b7fbbce2345d7772b0674a318d56539133983e61");
+        formData.append("account", "1698170542e4da3b7fbbce2345d7772b0674a318d5653806aec6798");
         formData.append("recipient", operadora+cliente.telefono);
         formData.append("type", "media");
         formData.append("message", `Hola *${cliente.nombre}${cliente.apellido}* 

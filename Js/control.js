@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
         formData.append("media_file", archivo);
 
         var xhr = new XMLHttpRequest();
-        
+
         xhr.open("POST", "https://whats-flow.com/api/send/whatsapp", true);
 
         xhr.onload = function() {

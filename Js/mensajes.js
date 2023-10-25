@@ -29,7 +29,7 @@ let inputFile = document.getElementById("inputFile").files[0];
         formData.append("account", "1698239289e4da3b7fbbce2345d7772b0674a318d56539133983e61");
         formData.append("recipient", operadora+cliente.telefono);
         formData.append("type", "media");
-        formData.append("message", areaMensaje);
+        formData.append("message", areaMensaje.value);
         formData.append("media_file", inputFile);
 
         var xhr = new XMLHttpRequest();
@@ -52,6 +52,5 @@ let inputFile = document.getElementById("inputFile").files[0];
         xhr.send(formData);
             })
             
-            areaMensaje.value = ""
         })
     })

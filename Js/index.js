@@ -39,7 +39,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         <td>${numero++}</td>
         <td>${cliente.nombre} ${cliente.apellido}</td>
         <td>${cliente.telefono}</td>
-        <td>${cliente.direccion} + ${cliente.referencia}</td>
+        <td>${cliente.direccion} | ${cliente.referencia}</td>
         <td><button data-id="${cliente.id}" class="btn btn-warning" type="button">Eliminar</button></td>
     </tr>
              `;

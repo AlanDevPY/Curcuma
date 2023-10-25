@@ -6,7 +6,7 @@ import {
 let btnEnvio = document.getElementById("btnEnvio")
 let areaMensaje = document.getElementById("areaMensaje")
 let operadora = 595
-let inputFile = document.getElementById("inputFile").files[0];
+let inputFile = document.getElementById("inputFile");
 
 
 
@@ -17,7 +17,7 @@ let inputFile = document.getElementById("inputFile").files[0];
 
         obtenerClientes((querySnapshot) => {
             const clientes = []; // Arreglo para almacenar números de teléfono
-            querySnapshot.forEach((doc) => {
+            querySnapshot.forEach((doc) => { 
                 const cliente = doc.data();
                 clientes.push(cliente);
             });
@@ -29,8 +29,11 @@ let inputFile = document.getElementById("inputFile").files[0];
         formData.append("account", "1698239289e4da3b7fbbce2345d7772b0674a318d56539133983e61");
         formData.append("recipient", operadora+cliente.telefono);
         formData.append("type", "media");
-        formData.append("message", areaMensaje.value);
-        formData.append("media_file", inputFile);
+        formData.append("message", `Hola *${cliente.nombre}${cliente.apellido}* 
+${areaMensaje.value}
+        
+        `);
+        formData.append("media_file", inputFile.files[0]);
 
         var xhr = new XMLHttpRequest();
         
